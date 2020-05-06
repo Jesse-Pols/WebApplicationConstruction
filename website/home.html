@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Les 5</title>
+	<link rel="stylesheet" type="text/css" href="style/theme.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.min.css">
+</head>
+<body>
+	<div id="frame">
+		<div id="myLocation" class="hoverable" onclick="showWeatherByCurrentLocation();">
+			<div class="title">Mijn locatie</div>
+			<div class="content">
+				<div class="context">
+					<b>Landcode:</b><br>
+					<b>Land:</b><br>
+					<b>Regio:</b><br>
+					<b>Stad:</b><br>
+					<b>Postcode:</b><br>
+					<b>Latitude:</b><br>
+					<b>Longitude:</b><br>
+					<b>IP:</b>
+				</div>
+				<div class="data">
+					<label id="landcode">NB</label><br>
+					<label id="land">NB</label><br>
+					<label id="regio">NB</label><br>
+					<label id="stad">NB</label><br>
+					<label id="postcode">NB</label><br>
+					<label id="latitude">NB</label><br>
+					<label id="longitude">NB</label><br>
+					<label id="ip">NB</label>
+				</div>
+			</div>
+		</div><br>
+
+		<div id="weatherInfo">
+			<div class="title">Het weer in <label id="currentCity">Utrecht</label><span id="flag" class="flag-icon flag-icon-nl"></span></div>
+			<div class="content">
+				<div class="context">
+					<b>Temperatuur:</b><br>
+					<b>Luchtvochtigheid:</b><br>
+					<b>Windsnelheid:</b><br>
+					<b>Windrichting:</b><br>
+					<b>Zonsopgang:</b><br>
+					<b>Zonsondergang:</b>
+				</div>
+				<div class="data">
+					<label id="temperatuur">NB</label><br>
+					<label id="luchtvochtigheid">NB</label><br>
+					<label id="windsnelheid">NB</label><br>
+					<label id="windrichting">NB</label><br>
+					<label id="zonsopgang">NB</label><br>
+					<label id="zonsondergang">NB</label>
+				</div>
+			</div>
+		</div><br>
+
+		<div id="countryList">
+			<div class="title">Beschikbare vakantiebestemmingen</div>
+			<table id="countryTable">
+				<tr>
+					<th id="tableLand" onclick="sortAlphabetic('tableLand');">Land</th>
+					<th id="tableHoofdstad" onclick="sortAlphabetic('tableHoofdstad');">Hoofdstad</th>
+					<th id="tableRegio" onclick="sortAlphabetic('tableRegio');">Regio</th>
+					<th id="tableOppervlakte" onclick="sortAlphabetic('tableOppervlakte');">Oppervlakte</th>
+					<th id="tableInwoners" onclick="sortAlphabetic('tableInwoners');">Inwoners</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- Hier komen jouw script-tags -->
+	<script src="js/services.js"></script>
+	<script src="js/setters.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+body {
+	background-color: #d7d5cd;
+}
+
+.title {
+	font-weight: bold;
+	background-color: #a0998d;
+	color: #FFF;
+    padding: 8px;
+}
+
+.content {
+	padding: 10px;
+}
+
+.context {
+	width: 15%;
+	float: left;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 10px;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.flag-icon {
+	float: right;
+}
+
+.hoverable:hover {
+	color: #FFF;
+	background-color: #adaba4;
+	border: 1px solid black;
+	cursor: pointer;
+}
