@@ -42,3 +42,58 @@ var degToCard = function(deg){
     return "Noord"; 
   }
 }
+
+var getRequest = function(url, func) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var data = JSON.parse(this.responseText);
+      func(data);
+    }
+  }
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function checkIfStored(name) {
+  if (sessionStorage.getItem(name) != null) return true; 
+  return false;
+}
+
+function getFromStorage(name) {
+  let item = sessionStorage.getItem(name);
+  let parsed = JSON.parse(item);
+
+  // If the item has expired: return null
+  if (hasItemExpired(parsed)) {
+    sessionStorage.removeItem(name);
+    console.log(name + " has expired, and was removed from the sessionStorage.");
+    return null;
+  } 
+
+  console.log("Retreived " + name + " from the sessionStorage.");
+  return parsed;
+}
+
+function saveToStorage(name, x) {
+  x.timestamp = new Date(); 
+  let item = JSON.stringify(x);
+  sessionStorage.setItem(name, item);
+
+  console.log(name + " has been added to the sessionStorage.");
+}
+
+function hasItemExpired(item) {
+  let date = new Date(item.timestamp);
+  let expirationDate = addMinutes(date, 1);
+
+  if (new Date() >= expirationDate) return true;
+  return false;
+}
+
+function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes*60000);
+
+    // For testing:
+    // return date.setSeconds(date.getSeconds() + 5);
+}

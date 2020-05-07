@@ -2,18 +2,6 @@ var ipApiUrl = "https://ipapi.co/json/";
 var countryApi = "https://restcountries.eu/rest/v2/all";
 var openWeatherMapUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&appid=15f8b16ba77633865f4a480cff38a0e3";
 
-var getRequest = function(url, func) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var data = JSON.parse(this.responseText);
-			func(data);
-		}
-	}
-	xhttp.open("GET", url, true);
-	xhttp.send();
-}
-
 function initPage() {
 	getRequest(ipApiUrl, function(x) {
 		setOwnLocation(x);
@@ -23,9 +11,25 @@ function initPage() {
 }
 
 function showWeather(latitude, longitude, city) {
+	console.log("\nShowing Weather...");
+
+	if (checkIfStored(city)) {
+		let x = getFromStorage(city);
+		if (x == null) {
+			showUnstoredWeather(latitude, longitude, city);	
+		} else {
+			setCurrentWeather(x, city);	
+		}
+	} else {
+		showUnstoredWeather(latitude, longitude, city);	
+	}		
+}
+
+function showUnstoredWeather(latitude, longitude, city) {
 	getRequest(openWeatherMapUrl + "&lat=" + latitude + "&lon=" + longitude, function(x) {
+		saveToStorage(city, x);
 		setCurrentWeather(x, city);
-	});
+	});		
 }
 
 function showWeatherByCurrentLocation() {
@@ -40,10 +44,6 @@ function loadCountries() {
 	getRequest(countryApi, function(x){
 		setTableData(x);
 	});
-}
-
-function sortAlphabetic(id) {
-
 }
 
 initPage();

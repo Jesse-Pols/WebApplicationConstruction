@@ -2,6 +2,15 @@ body {
 	background-color: #d7d5cd;
 }
 
+table {
+	border-collapse: collapse;
+	margin: 10px;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
 .title {
 	font-weight: bold;
 	background-color: #a0998d;
@@ -18,22 +27,64 @@ body {
 	float: left;
 }
 
-table {
-	border-collapse: collapse;
-	margin: 10px;
-}
-
-table, th, td {
-	border: 1px solid black;
-}
-
 .flag-icon {
 	float: right;
 }
+
+  #myLocation .content .data,
+  #weatherInfo .content .data {
+  	float: right;
+  }
+
+  #myLocation, #weatherInfo {
+  	    padding: 10px;
+  }
 
 .hoverable:hover {
 	color: #FFF;
 	background-color: #adaba4;
 	border: 1px solid black;
 	cursor: pointer;
+}
+
+@media only screen and (max-width: 888px) {
+	#weatherInfo, #myLocation {
+		width: 73%;
+	}
+	
+  #weatherInfo .content {
+  	height: 92px;
+  }
+
+  #myLocation .content {
+  	height: 130px;
+  }
+
+  .countryList {
+	overflow-x:scroll;
+	}
+}
+
+@media only screen and (min-width: 888px) {
+	#frame {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+		grid-gap: 1px 1px;
+		grid-template-areas: "myLocation weatherInfo" "countryList countryList";
+		max-height: 10px;
+	}
+
+	#myLocation {
+		grid-area: myLocation;
+	}
+
+	#weatherInfo {
+		grid-area: weatherInfo;
+	}
+
+	#countryList {
+		grid-area: countryList;
+	}
+
 }

@@ -4,10 +4,11 @@
 	<title>Les 5</title>
 	<link rel="stylesheet" type="text/css" href="style/theme.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div id="frame">
-		<div id="myLocation" class="hoverable" onclick="showWeatherByCurrentLocation();">
+		<div id="myLocation" class="myLocation hoverable" onclick="showWeatherByCurrentLocation();">
 			<div class="title">Mijn locatie</div>
 			<div class="content">
 				<div class="context">
@@ -33,7 +34,7 @@
 			</div>
 		</div><br>
 
-		<div id="weatherInfo">
+		<div id="weatherInfo" class="weatherInfo">
 			<div class="title">Het weer in <label id="currentCity">Utrecht</label><span id="flag" class="flag-icon flag-icon-nl"></span></div>
 			<div class="content">
 				<div class="context">
@@ -55,15 +56,15 @@
 			</div>
 		</div><br>
 
-		<div id="countryList">
+		<div id="countryList" class="countryList">
 			<div class="title">Beschikbare vakantiebestemmingen</div>
 			<table id="countryTable">
 				<tr>
-					<th id="tableLand" onclick="sortAlphabetic('tableLand');">Land</th>
-					<th id="tableHoofdstad" onclick="sortAlphabetic('tableHoofdstad');">Hoofdstad</th>
-					<th id="tableRegio" onclick="sortAlphabetic('tableRegio');">Regio</th>
-					<th id="tableOppervlakte" onclick="sortAlphabetic('tableOppervlakte');">Oppervlakte</th>
-					<th id="tableInwoners" onclick="sortAlphabetic('tableInwoners');">Inwoners</th>
+					<th>Land</th>
+					<th>Hoofdstad</th>
+					<th>Regio</th>
+					<th>Oppervlakte</th>
+					<th>Inwoners</th>
 				</tr>
 			</table>
 		</div>
