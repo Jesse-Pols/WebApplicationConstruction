@@ -4,3 +4,5 @@ firstapp/.project
 firstapp/.classpath
 .project
 firstapp/.idea/
+firstapp/bin/.idea/
+firstapp/bin/.settings/org.eclipse.core.resources.prefs
