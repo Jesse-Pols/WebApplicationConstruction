@@ -8,7 +8,7 @@ function initPage() {
 		setOwnLocation(x);
 		loadCountries();
 		showWeather(x.latitude, x.longitude, x.city);
-	}, false);
+	});
 }
 
 function showWeather(latitude, longitude, city) {
@@ -30,7 +30,7 @@ function showUnstoredWeather(latitude, longitude, city) {
 	getRequest(openWeatherMapUrl + "&lat=" + latitude + "&lon=" + longitude, function(x) {
 		saveToStorage(city, x);
 		setCurrentWeather(x, city);
-	}, false);		
+	});
 }
 
 function showWeatherByCurrentLocation() {
@@ -44,7 +44,27 @@ function showWeatherByCurrentLocation() {
 function loadCountries() {
 	getRequest(countryApi, function(x){
 		setTableData(x);
-	}, true);
+	});
+}
+
+function initModal() {
+	let modal = document.getElementById("modal");
+	let btn = document.getElementById("openModalAddCountry");
+	let span = document.getElementsByClassName("close")[0];
+
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
 }
 
 initPage();

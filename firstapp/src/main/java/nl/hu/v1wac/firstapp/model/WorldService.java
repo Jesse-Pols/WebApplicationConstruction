@@ -51,4 +51,30 @@ public class WorldService {
 		}
 		return null;
 	}
+
+	public Boolean deleteCountryByCode(String code) {
+		try {
+			Country country = countryDao.findByCode(code);
+			return countryDao.delete(country);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public Boolean updateCountry(Country country) {
+		try {
+			Country existingCountry = countryDao.findByName(country.getOldName());
+			existingCountry.setName(country.getName());
+			existingCountry.setCapital(country.getCapital());
+			existingCountry.setPopulation(country.getPopulation());
+			existingCountry.setSurface(country.getSurface());
+			existingCountry.setRegion(country.getRegion());
+
+			return countryDao.update(existingCountry);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

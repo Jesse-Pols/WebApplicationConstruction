@@ -13,4 +13,5 @@ public interface CountryDao {
     List<Country> find10LargestSurfaces() throws SQLException;
     Boolean update(Country country) throws SQLException;
     Boolean delete(Country country) throws SQLException;
+    Country findByName(String name) throws SQLException;
 }

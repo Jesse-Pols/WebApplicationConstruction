@@ -113,10 +113,26 @@ public class CountryPostgresDaoImpl implements CountryDao {
      * @throws SQLException
      */
     public Boolean delete(Country country) throws SQLException {
+        // This could be easier with just the code as parameter. The interface tells us to use a Country Object though.
         String query = "DELETE FROM country WHERE code = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, country.getCode());
         return service.executePreparedStatementWithBoolean(ps);
+    }
+
+    /**
+     * Find a country by name
+     * @param name
+     * @return country
+     * @throws SQLException
+     */
+    public Country findByName(String name) throws SQLException {
+        String query = "SELECT code, iso3, name, capital, continent, region, surfacearea, population, governmentform, latitude, longitude FROM country WHERE name = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, name);
+        Country country = service.getCountriesFromResultSet(ps.executeQuery()).get(0);
+        ps.close();
+        return country;
     }
 }
 
@@ -142,8 +158,7 @@ class CountryPostgresDaoImplService {
                     rs.getInt("population"),
                     rs.getString("governmentform"),
                     rs.getDouble("latitude"),
-                    rs.getDouble("longitude")
-            ));
+                    rs.getDouble("longitude")));
         }
 
         rs.close();

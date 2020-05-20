@@ -12,6 +12,7 @@ public class Country {
 	private String government;
 	private double latitude;
 	private double longitude;
+	private String oldname;
 	
 	public Country(String code, String iso3, String nm, String cap, String ct, String reg, double sur, int pop, String gov, double lat, double lng) {
 		this.code = code; 
@@ -26,7 +27,18 @@ public class Country {
 		this.latitude = lat;
 		this.longitude = lng;
 	}
-	
+
+	public Country() {}
+
+	public Country(String name, String capital, String region, int population, double surface, String oldname) {
+		this.oldname = oldname;
+		this.name = name;
+		this.capital = capital;
+		this.region = region;
+		this.population = population;
+		this.surface = surface;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -69,5 +81,33 @@ public class Country {
 	
 	public double getLongitude() {
 		return longitude;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public void setSurface(double surface) {
+		this.surface = surface;
+	}
+
+	public void setOldName(String name) {
+		this.oldname = name;
+	}
+
+	public String getOldName() {
+		return this.oldname;
+	}
+
+	public void setPopulation(int population) {
+		this.population = population;
 	}
 }

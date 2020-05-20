@@ -17,14 +17,7 @@ function setCurrentWeather(data, city) {
 	writeDataToInnerHTML("windrichting", degToCard(data.wind.deg));
 	writeDataToInnerHTML("zonsopgang", formatDate(new Date(data.sys.sunrise)));
 	writeDataToInnerHTML("zonsondergang", formatDate(new Date(data.sys.sunset)));
-
-	var flag = document.getElementById("flag");
-	if (data.sys.country == null) {
-		flag.style = "display: none;"
-	} else {
-		flag.style = "display: block;"
-		flag.setAttribute("class", "flag-icon flag-icon-" + data.sys.country.toLowerCase());		
-	}
+    setFlag(data.sys.country);
 }
 
 function setTableData(data) {
@@ -42,25 +35,26 @@ function setTableRow(table, element) {
 	let oppervlakte = row.insertCell();
 	let inwoners = row.insertCell();
 
+	let deleteCell = row.insertCell();
+	let updateCell = row.insertCell();
+
 	land.innerHTML = element.name;
-	hoofdstad.innerHTML = "hoofdstad";
-	regio.innerHTML = "regio";
-	oppervlakte.innerHTML = "oppervlakte";
-	inwoners.innerHTML = "populatie";
-	//hoofdstad.innerHTML = element.capital; 
-	//regio.innerHTML = element.region;
-	//oppervlakte.innerHTML = element.area;
-	//inwoners.innerHTML = element.population;
+	hoofdstad.innerHTML = element.capital;
+	regio.innerHTML = element.region;
+	oppervlakte.innerHTML = element.surface;
+	inwoners.innerHTML = element.population;
+
+    deleteCell.appendChild(createDeleteButton(element.code));
+    updateCell.appendChild(createUpdateButton(land, hoofdstad, regio, oppervlakte, inwoners, element));
+    updateCell.appendChild(createExecuteButton(element.name));
 
 	row.classList.add('hoverable');
-
 	row.onclick = function() {
 		if (element.capital == null || element.capital == "") {
-			showWeather(element.latlng[0], element.latlng[1], element.name);
+			showWeather(element.lat, element.lng, element.name);
 		} else {
-			showWeather(element.latlng[0], element.latlng[1], element.capital);	
+			showWeather(element.lat, element.lng, element.capital);
 		}					
 	}
-
 	return table;
 }
