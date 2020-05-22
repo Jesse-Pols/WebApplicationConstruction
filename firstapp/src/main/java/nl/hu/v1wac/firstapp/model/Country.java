@@ -39,6 +39,15 @@ public class Country {
 		this.surface = surface;
 	}
 
+	public Country(String code, String name, String capital, String region, int population, double surface) {
+		this.code = code;
+		this.name = name;
+		this.capital = capital;
+		this.region = region;
+		this.population = population;
+		this.surface = surface;
+	}
+
 	public String getCode() {
 		return code;
 	}

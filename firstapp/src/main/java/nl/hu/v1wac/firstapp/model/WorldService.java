@@ -77,4 +77,13 @@ public class WorldService {
 		}
 		return false;
 	}
+
+	public Boolean saveCountry(Country country) {
+		try {
+			return countryDao.save(country);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

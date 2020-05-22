@@ -67,5 +67,46 @@ function initModal() {
 	}
 }
 
+function saveCountry() {
+    let code = document.getElementById('newCode');
+    let iso = document.getElementById('newIso3');
+    let name = document.getElementById('newName');
+    let capital = document.getElementById('newCapital');
+    let continent = document.getElementById('newContinent');
+    let region = document.getElementById('newRegion');
+    let surface = document.getElementById('newSurface');
+    let population = document.getElementById('newPopulation');
+    let government = document.getElementById('newGov');
+    let latitude = document.getElementById('newLat');
+    let longitude = document.getElementById('newLong');
+
+    let data = {};
+    data.code = code.value;
+    data.iso3 = iso.value;
+    data.name = name.value;
+    data.capital = capital.value;
+    data.continent = continent.value;
+    data.region = region.value;
+    data.surface = surface.value;
+    data.population = population.value;
+    data.government = government.value;
+    data.latitude = latitude.value;
+    data.longitude = longitude.value;
+    let json = JSON.stringify(data);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+              location.reload();
+        }
+
+        if (this.readyState == 4 && this.status == 500) {
+            alert("Er is iets mis gegaan. Het land kon niet worden opgeslagen.");
+        }
+    }
+    xhttp.open("POST", countryApi + "/" + json + "/save", true);
+    xhttp.send();
+}
+
 initPage();
 initModal();

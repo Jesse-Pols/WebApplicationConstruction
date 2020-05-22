@@ -166,4 +166,40 @@ public class WorldResource {
 		return array.toString();
 	}
 
+	@POST
+	@Path("/{json}/save")
+	@Produces("application/json")
+	public String saveCountry(@PathParam("json") String json) throws IOException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode jsonNode = objectMapper.readTree(json);
+
+		String code = jsonNode.get("code").asText();
+		String iso3 = jsonNode.get("iso3").asText();
+		String name = jsonNode.get("name").asText();
+		String capital = jsonNode.get("capital").asText();
+		String continent = jsonNode.get("continent").asText();
+		String region = jsonNode.get("region").asText();
+		int population = jsonNode.get("population").asInt();
+		double surface = jsonNode.get("surface").asDouble();
+		String government = jsonNode.get("government").asText();
+		double latitude = jsonNode.get("latitude").asDouble();
+		double longitude = jsonNode.get("longitude").asDouble();
+
+		Country country = new Country(code, iso3, name, capital, continent, region, surface, population, government, latitude, longitude);
+
+		ServiceProvider serviceProvider = new ServiceProvider();
+		JsonArrayBuilder jab = Json.createArrayBuilder();
+
+		JsonObjectBuilder job = Json.createObjectBuilder();
+		Boolean success = serviceProvider.getWorldService().saveCountry(country);
+		job.add("success", success);
+		if (!success) {
+			job.add("error", "Country couldn't be added. World Service failed.");
+		}
+		jab.add(job);
+
+		JsonArray array = jab.build();
+		return array.toString();
+	}
+
 }
