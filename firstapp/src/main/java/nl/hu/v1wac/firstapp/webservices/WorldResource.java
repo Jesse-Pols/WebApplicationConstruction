@@ -3,6 +3,7 @@ package nl.hu.v1wac.firstapp.webservices;
 import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -120,6 +121,7 @@ public class WorldResource {
 	@DELETE
 	@Path("/{code}/delete")
 	@Produces("application/json")
+	@RolesAllowed("user")
 	public String deleteCountry(@PathParam("code") String code) {
 		ServiceProvider serviceProvider = new ServiceProvider();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -139,6 +141,7 @@ public class WorldResource {
 	@PUT
 	@Path("/{json}/update")
 	@Produces("application/json")
+	@RolesAllowed("user")
 	public String updateCountry(@PathParam("json") String json) throws IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode jsonNode = objectMapper.readTree(json);
@@ -169,6 +172,7 @@ public class WorldResource {
 	@POST
 	@Path("/{json}/save")
 	@Produces("application/json")
+	@RolesAllowed("user")
 	public String saveCountry(@PathParam("json") String json) throws IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode jsonNode = objectMapper.readTree(json);
