@@ -94,18 +94,18 @@ function saveCountry() {
     data.longitude = longitude.value;
     let json = JSON.stringify(data);
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-              location.reload();
+    fetch(countryApi + "/" + json + "/save", {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + sessionStorage.getItem("sessionToken")
         }
-
-        if (this.readyState == 4 && this.status == 500) {
+    }).then(function(response) {
+        if (response.ok) {
+            location.reload();
+        } else {
             alert("Er is iets mis gegaan. Het land kon niet worden opgeslagen.");
         }
-    }
-    xhttp.open("POST", countryApi + "/" + json + "/save", true);
-    xhttp.send();
+    }).catch(error => console.log(error));
 }
 
 initPage();

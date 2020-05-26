@@ -4,18 +4,18 @@ function createDeleteButton(code) {
     deleteButton.value = "Verwijderen";
 
     deleteButton.onclick = function() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          location.reload();
-        }
-
-        if (this.readyState == 4 && this.status == 500) {
-            alert("Er is iets mis gegaan. Het land kon niet worden verwijdert.");
-        }
-      }
-      xhttp.open("DELETE", countryApi + "/" + code + "/delete", true);
-      xhttp.send();
+        fetch(countryApi + "/" + code + "/delete", {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("sessionToken")
+            }
+        }).then(function(response) {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert("Er is iets mis gegaan. Het land kon niet worden verwijderd.");
+            }
+        }).catch(error => console.log(error));
     };
 
     return deleteButton;
@@ -65,18 +65,18 @@ function createExecuteButton(name) {
         data.population = populatie.value;
         let json = JSON.stringify(data);
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                  location.reload();
+        fetch(countryApi + "/" + json + "/update", {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem("sessionToken")
             }
-
-            if (this.readyState == 4 && this.status == 500) {
+        }).then(function(response) {
+            if (response.ok) {
+                location.reload();
+            } else {
                 alert("Er is iets mis gegaan. De update kon niet worden uitgevoerd.");
             }
-        }
-        xhttp.open("PUT", countryApi + "/" + json + "/update", true);
-        xhttp.send();
+        }).catch(error => console.log(error));
     }
 
     return executeButton;
